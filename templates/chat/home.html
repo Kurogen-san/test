@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+
+{% block title %}AIチャット - ホーム{% endblock %}
+
+{% block content %}
+<!-- ヒーローセクション -->
+<section class="gradient-bg text-white py-20">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                悩みを話すだけで、<br>
+                AIが課題解決に最適な<br>
+                ツールをご提案します
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+                DX化を進めなければという焦りはあるけど、<br>
+                何をすればいいかわからない...
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm">
+                    🤖 AI活用
+                </span>
+                <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm">
+                    ⚡ 業務効率化
+                </span>
+                <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm">
+                    📈 売上アップ
+                </span>
+                <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm">
+                    💰 コスト削減
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- チャットセクション -->
+<section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">さっそく入力してみましょう！</h2>
+            <p class="text-lg text-gray-600">
+                困っていることや、効率化したいことなどを気軽に入力してください。<br>
+                数回の会話でおすすめのツールが表示されます。
+            </p>
+        </div>
+
+        <!-- チャットコンテナ -->
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-200">
+            <!-- チャットヘッダー -->
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-t-2xl">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                        <i class="fas fa-robot text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold">AIアシスタント</h3>
+                        <p class="text-blue-100">オンライン - お手伝いします</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- チャットメッセージエリア -->
+            <div id="chat-messages" class="chat-container p-6 space-y-4">
+                <!-- 初期メッセージ -->
+                <div class="flex justify-start">
+                    <div class="message-bubble ai-message rounded-2xl px-6 py-4">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                                <i class="fas fa-robot text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-800">
+                                    こんにちは！AIアシスタントです。<br>
+                                    お困りのことや、効率化したい業務について教えてください。<br>
+                                    できる限り具体的にお答えします。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- タイピングインジケーター -->
+            <div id="typing-indicator" class="typing-indicator p-6">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
+                        <i class="fas fa-robot text-white text-sm"></i>
+                    </div>
+                    <div class="flex space-x-1">
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- メッセージ入力エリア -->
+            <div class="p-6 border-t border-gray-200">
+                <form id="chat-form" class="flex space-x-4">
+                    <div class="flex-1">
+                        <textarea 
+                            id="message-input" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                            placeholder="メッセージを入力してください..."
+                            rows="2"
+                        ></textarea>
+                    </div>
+                    <button 
+                        type="submit" 
+                        class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-2xl hover:from-blue-700 hover:to-purple-700 transition duration-300 flex items-center"
+                        disabled
+                    >
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        送信
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 特徴セクション -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">特徴</h2>
+            <p class="text-lg text-gray-600">AIチャットの魅力をご紹介</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="feature-card bg-white rounded-2xl p-8 shadow-lg">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bolt text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">簡単に、素早く</h3>
+                    <p class="text-gray-600">
+                        面倒な入力は不要で、チャットからAIがおすすめツールをすぐにご提案。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="feature-card bg-white rounded-2xl p-8 shadow-lg">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-gift text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">完全無料で使える</h3>
+                    <p class="text-gray-600">
+                        チャット・ツール提案はもちろん、概算や導入計画書の発行も無料でご提供。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="feature-card bg-white rounded-2xl p-8 shadow-lg">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-headset text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">導入相談も可能</h3>
+                    <p class="text-gray-600">
+                        さらに詳しく分析をしたい、導入サポートを頼みたいなどのご要望にもお応え。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const chatForm = document.getElementById('chat-form');
+    const messageInput = document.getElementById('message-input');
+    const chatMessages = document.getElementById('chat-messages');
+    const typingIndicator = document.getElementById('typing-indicator');
+    const sendButton = chatForm.querySelector('button[type="submit"]');
+
+    // 入力フィールドの監視
+    messageInput.addEventListener('input', function() {
+        sendButton.disabled = !this.value.trim();
+    });
+
+    // Enterキーで送信（Shift+Enterで改行）
+    messageInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            if (this.value.trim()) {
+                chatForm.dispatchEvent(new Event('submit'));
+            }
+        }
+    });
+
+    // フォーム送信処理
+    chatForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const message = messageInput.value.trim();
+        if (!message) return;
+
+        // ユーザーメッセージを表示
+        addMessage(message, 'user');
+        messageInput.value = '';
+        sendButton.disabled = true;
+
+        // タイピングインジケーターを表示
+        typingIndicator.classList.add('show');
+
+        try {
+            const response = await fetch('{% url "chat:chat_api" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({ message: message })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                addMessage(data.response, 'ai');
+            } else {
+                addMessage('申し訳ございません。エラーが発生しました: ' + (data.error || '不明なエラー'), 'ai');
+            }
+        } catch (error) {
+            addMessage('申し訳ございません。ネットワークエラーが発生しました。', 'ai');
+        } finally {
+            typingIndicator.classList.remove('show');
+        }
+    });
+
+    function addMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+        
+        const bubbleClass = sender === 'user' ? 'user-message' : 'ai-message';
+        const iconClass = sender === 'user' ? 'fas fa-user' : 'fas fa-robot';
+        const iconBg = sender === 'user' ? 'bg-white bg-opacity-20' : 'bg-blue-600';
+        
+        messageDiv.innerHTML = `
+            <div class="message-bubble ${bubbleClass} rounded-2xl px-6 py-4">
+                <div class="flex items-start ${sender === 'user' ? 'flex-row-reverse' : ''}">
+                    <div class="w-8 h-8 ${iconBg} rounded-full flex items-center justify-center ${sender === 'user' ? 'ml-3' : 'mr-3'} flex-shrink-0">
+                        <i class="${iconClass} ${sender === 'user' ? 'text-white' : 'text-white'} text-sm"></i>
+                    </div>
+                    <div class="${sender === 'user' ? 'text-right' : ''}">
+                        <p class="${sender === 'user' ? 'text-white' : 'text-gray-800'}">${text.replace(/\n/g, '<br>')}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+});
+</script>
+{% endblock %} 

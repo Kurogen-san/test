@@ -1,0 +1,199 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}チャットメッセージ管理 - AIチャット管理画面{% endblock %}
+{% block page_title %}チャットメッセージ管理{% endblock %}
+
+{% block content %}
+<!-- 検索機能 -->
+<div class="card bg-white rounded-2xl p-6 shadow-lg mb-6">
+    <form method="get" class="flex items-center space-x-4">
+        <div class="flex-1">
+            <input 
+                type="text" 
+                name="search" 
+                value="{{ search }}"
+                placeholder="メッセージを検索..."
+                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            >
+        </div>
+        <button 
+            type="submit" 
+            class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition duration-200"
+        >
+            <i class="fas fa-search mr-2"></i>
+            検索
+        </button>
+        {% if search %}
+        <a href="{% url 'admin_panel:chat_messages' %}" class="text-gray-600 hover:text-gray-800">
+            <i class="fas fa-times mr-1"></i>
+            クリア
+        </a>
+        {% endif %}
+    </form>
+</div>
+
+<!-- メッセージ一覧 -->
+<div class="card bg-white rounded-2xl shadow-lg">
+    <div class="p-6 border-b border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-800">
+            <i class="fas fa-comments mr-2"></i>
+            チャットメッセージ一覧
+        </h3>
+        <p class="text-sm text-gray-600 mt-1">{{ messages.count }}件のメッセージ</p>
+    </div>
+    
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="text-left py-4 px-6 text-sm font-medium text-gray-600">ID</th>
+                    <th class="text-left py-4 px-6 text-sm font-medium text-gray-600">ユーザーメッセージ</th>
+                    <th class="text-left py-4 px-6 text-sm font-medium text-gray-600">AI応答</th>
+                    <th class="text-left py-4 px-6 text-sm font-medium text-gray-600">作成日時</th>
+                    <th class="text-left py-4 px-6 text-sm font-medium text-gray-600">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for message in messages %}
+                <tr class="border-b border-gray-100 hover:bg-gray-50">
+                    <td class="py-4 px-6 text-sm text-gray-600">{{ message.id }}</td>
+                    <td class="py-4 px-6">
+                        <div class="max-w-xs">
+                            <p class="text-sm text-gray-800">{{ message.user_message|truncatechars:50 }}</p>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6">
+                        <div class="max-w-xs">
+                            <p class="text-sm text-gray-800">{{ message.ai_response|truncatechars:50 }}</p>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6 text-sm text-gray-600">{{ message.created_at|date:"Y/m/d H:i" }}</td>
+                    <td class="py-4 px-6">
+                        <div class="flex items-center space-x-2">
+                            <button 
+                                onclick="viewMessage({{ message.id }})"
+                                class="text-blue-600 hover:text-blue-800 text-sm"
+                                title="詳細表示"
+                            >
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button 
+                                onclick="deleteMessage({{ message.id }})"
+                                class="text-red-600 hover:text-red-800 text-sm"
+                                title="削除"
+                            >
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="py-8 px-6 text-center text-gray-500">
+                        <i class="fas fa-inbox text-2xl mb-2"></i>
+                        <p>メッセージがありません</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- メッセージ詳細モーダル -->
+<div id="messageModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-screen overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-semibold text-gray-800">メッセージ詳細</h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6">
+                <div id="messageDetails">
+                    <!-- メッセージ詳細がここに表示されます -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// メッセージ詳細表示
+function viewMessage(messageId) {
+    // 実際の実装では、Ajaxでメッセージ詳細を取得
+    const modal = document.getElementById('messageModal');
+    const details = document.getElementById('messageDetails');
+    
+    // 仮の実装（実際のデータはAjaxで取得）
+    details.innerHTML = `
+        <div class="space-y-4">
+            <div>
+                <h4 class="font-semibold text-gray-800 mb-2">
+                    <i class="fas fa-user mr-2"></i>ユーザーメッセージ
+                </h4>
+                <p class="text-gray-700 bg-gray-50 p-4 rounded-lg">
+                    メッセージID: ${messageId} の詳細を表示
+                </p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-800 mb-2">
+                    <i class="fas fa-robot mr-2"></i>AI応答
+                </h4>
+                <p class="text-gray-700 bg-gray-50 p-4 rounded-lg">
+                    AI応答の詳細を表示
+                </p>
+            </div>
+        </div>
+    `;
+    
+    modal.classList.remove('hidden');
+}
+
+// モーダルを閉じる
+function closeModal() {
+    const modal = document.getElementById('messageModal');
+    modal.classList.add('hidden');
+}
+
+// メッセージ削除
+function deleteMessage(messageId) {
+    if (confirm('このメッセージを削除しますか？')) {
+        fetch(`/panel/messages/delete/${messageId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                location.reload();
+            } else {
+                alert('削除に失敗しました');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('削除に失敗しました');
+        });
+    }
+}
+
+// モーダル外クリックで閉じる
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('messageModal');
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+});
+</script>
+{% endblock %} 

@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block title %}AIチャット - アバウト{% endblock %}
+
+{% block content %}
+<!-- ヒーローセクション -->
+<section class="gradient-bg text-white py-20">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">アバウト</h1>
+            <p class="text-xl md:text-2xl opacity-90">
+                AIチャットについて詳しくご紹介します
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- メインコンテンツ -->
+<section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="prose prose-lg max-w-none">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">私たちについて</h2>
+            
+            <div class="bg-gray-50 rounded-2xl p-8 mb-8">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                    ミッション
+                </h3>
+                <p class="text-gray-700 leading-relaxed">
+                    最新のAI技術を活用し、企業のDX化を加速させることで、より効率的で持続可能なビジネス環境の実現を目指しています。
+                    私たちは、複雑な技術をシンプルで使いやすい形で提供し、すべての企業がAIの恩恵を受けられる世界を作りたいと考えています。
+                </p>
+            </div>
+
+            <div class="bg-blue-50 rounded-2xl p-8 mb-8">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                    <i class="fas fa-eye text-blue-500 mr-3"></i>
+                    ビジョン
+                </h3>
+                <p class="text-gray-700 leading-relaxed">
+                    AI技術を誰でも簡単に活用できるプラットフォームを構築し、企業のデジタル変革を支援します。
+                    私たちは、技術の壁をなくし、すべての企業がAIの力を活用して競争力を向上させられる世界を実現します。
+                </p>
+            </div>
+
+            <div class="bg-green-50 rounded-2xl p-8 mb-8">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">
+                    <i class="fas fa-heart text-green-500 mr-3"></i>
+                    価値観
+                </h3>
+                <ul class="text-gray-700 leading-relaxed space-y-2">
+                    <li><strong>ユーザー第一:</strong> 常にユーザーのニーズを最優先に考え、使いやすいサービスを提供します</li>
+                    <li><strong>技術革新:</strong> 最新のAI技術を積極的に取り入れ、常に進歩し続けます</li>
+                    <li><strong>透明性:</strong> すべてのプロセスで透明性を保ち、信頼できるサービスを提供します</li>
+                    <li><strong>持続可能性:</strong> 環境と社会に配慮した持続可能なビジネスモデルを追求します</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- チームセクション -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">技術スタック</h2>
+            <p class="text-lg text-gray-600">最新の技術を活用してサービスを提供しています</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fab fa-python text-3xl text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Python</h3>
+                <p class="text-gray-600">バックエンド開発</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fab fa-js text-3xl text-green-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">JavaScript</h3>
+                <p class="text-gray-600">フロントエンド開発</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
+                <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-robot text-3xl text-purple-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">OpenAI API</h3>
+                <p class="text-gray-600">AI機能</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-6 shadow-lg text-center">
+                <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fab fa-aws text-3xl text-yellow-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">クラウド</h3>
+                <p class="text-gray-600">インフラストラクチャ</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 統計セクション -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">実績</h2>
+            <p class="text-lg text-gray-600">これまでの成果をご紹介</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="text-4xl font-bold text-blue-600 mb-2">1000+</div>
+                <div class="text-gray-600">ユーザー数</div>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-4xl font-bold text-green-600 mb-2">50,000+</div>
+                <div class="text-gray-600">チャットメッセージ</div>
+            </div>
+            
+            <div class="text-center">
+                <div class="text-4xl font-bold text-purple-600 mb-2">99.9%</div>
+                <div class="text-gray-600">稼働率</div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 
